@@ -49,6 +49,18 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 
+$serv = new Swoole\Http\Server('127.0.0.1', 9502);
+$serv->on('request', function ($req, $res) use ($app) {
+    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+    $response = $kernel->handle(
+        $request = Illuminate\Http\Request::capture()
+    );
+    $res->end($response);
+    $kernel->terminate($request, $response);
+});
+$serv->start();
+
+/*
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
@@ -57,4 +69,4 @@ $response = $kernel->handle(
 
 $response->send();
 
-$kernel->terminate($request, $response);
+$kernel->terminate($request, $response);*/

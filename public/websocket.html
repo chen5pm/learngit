@@ -12,7 +12,7 @@
                 alert("您的浏览器支持 WebSocket!");
 
                 // 打开一个 web socket
-                var ws = new WebSocket("ws://111.230.183.134:9501/");
+                var ws = new WebSocket("ws://111.230.183.134:9501?group=old");
 
                 ws.onopen = function()
                 {
@@ -24,6 +24,7 @@
                 ws.onmessage = function (evt)
                 {
                     var received_msg = evt.data;
+                    console.log(received_msg);
                     alert("数据已接收...");
                 };
 

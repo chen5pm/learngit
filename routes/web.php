@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test/{action?}', ['as'=>'test','uses'=>'TestController@index','display'=>'测试']);
